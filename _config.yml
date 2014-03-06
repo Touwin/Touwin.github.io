@@ -1,0 +1,6 @@
+name: "lud"
+description: ""
+url: "http://touwin.github.io"
+permalink: pretty
+pygments: true
+markdown: rdiscount

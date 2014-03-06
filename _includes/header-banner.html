@@ -1,0 +1,165 @@
+
+<style type="text/css">
+
+
+</style>
+<header>
+	<div class="paper">
+		<svg id="banner" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="800" height="250">
+			<style type="text/css">
+				text {	cursor:pointer;
+				      				line-heigh	t:125%;
+				      				stroke:none;
+				      				font-family:Impact;
+				      				text-anchor:start;
+				      				fill:white;
+				}
+				line {
+					stroke:none;
+				}
+			</style>
+		</svg>
+	</div>
+</header>
+<script type="text/javascript">
+	var svg = d3.select('#banner'),
+		width = 800,
+		height = 250,
+		links = [];
+		force = d3.layout.force().size([width,height]);
+	var nodes =
+		[	{fs:37, 	fo:1,  	y:66,      	x:65,     	t:'Zéro-Déchet'                           	}, // 0
+		 	{fs:38, 	fo:1,  	y:110,     	x:443,    	t:'Agriculture'                           	}, // 1
+		 	{fs:31, 	fo:1,  	y:207,     	x:627,    	t:'Locavore'                              	}, // 2
+		 	{fs:34, 	fo:1,  	y:159,     	x:349,    	t:'Solidarité'                            	}, // 3
+		 	{fs:37, 	fo:1,  	y:31,      	x:324,    	t:'Ecologie'                              	}, // 4
+		 	{fs:36, 	fo:0.6,	y:238,     	x:262,    	t:'Environnement'                         	}, // 5
+		 	{fs:34, 	fo:1,  	y:203,     	x:300,    	t:'Astuces'                               	}, // 6
+		 	{fs:29, 	fo:0.6,	y:26,      	x:5,      	t:'Alimentation'                          	}, // 7
+		 	{fs:37, 	fo:0.6,	y:33,      	x:486,    	t:'Consomation'                           	}, // 8
+		 	{fs:37, 	fo:0.6,	y:70,      	x:398,    	t:'Bons plans'                            	}, // 9
+		 	{fs:35, 	fo:0.6,	y:244,     	x:3,      	t:'Occasion'                              	}, // 10
+		 	{fs:42, 	fo:1,  	y:171,     	x:705,    	t:'Vrac'                                  	}, // 11
+		 	{fs:36, 	fo:1,  	y:70,      	x:599,    	t:'Coopération'                           	}, // 12
+		 	{fs:37, 	fo:0.6,	y:120,     	x:337,    	t:'Santé'                                 	}, // 13
+		 	{fs:24, 	fo:1,  	y:65,      	x:295,    	t:'Durable'                               	}, // 14
+		 	{fs:31, 	fo:1,  	y:171,     	x:505,    	t:'Recycler'                              	}, // 15
+		 	{fs:32, 	fo:0.6,	y:208,     	x:45,     	t:'Développement'                         	}, // 16
+		 	{fs:29, 	fo:0.6,	y:239,     	x:723,    	t:'Amap'                                  	}, // 17
+		 	{fs:24, 	fo:0.6,	y:200,     	x:443,    	t:'Désobéissance'                         	}, // 18
+		 	{fs:24, 	fo:1,  	y:138,     	x:585,    	t:'Entraide'                              	}, // 19
+		 	{fs:37, 	fo:1,  	y:245,     	x:183,    	t:'Bio'                                   	}, // 20
+		 	{fs:32, 	fo:0.6,	y:112,     	x:647,    	t:'Economie'                              	}, // 21
+		 	{fs:20, 	fo:1,  	y:172,     	x:15,     	t:'Avec des jeux de mots pourris dedans !'	}, // 22
+		 	{fs:28, 	fo:0,  	y:30,      	x:200,    	t:'Energie'                               	}, // 23
+		 	{fs:30, 	fo:1,  	y:240,     	x:525,    	t:'Composter'                             	}, // 24
+		 	{fs:110,	fo:1,  	y:149,     	x:-5,     	t:'Touwin'                                	}, // 25
+		 	{fs:30, 	fo:1,  	y:height/2,	x:width/2,	t:'', fixed:true                          	},	// point central
+		 	{fs:30, 	fo:1,  	y:0,       	x:width/2,	t:'', fixed:true                          	},	// haut
+		 	{fs:30, 	fo:1,  	y:height/2,	x:0,      	t:'', fixed:true                          	},	// gauche
+		 	{fs:30, 	fo:1,  	y:height/2,	x:width,  	t:'', fixed:true                          	},	// droite
+		 	{fs:30, 	fo:1,  	y:height,  	x:width/2,	t:'', fixed:true                          	},	// bas
+		 	{fs:30, 	fo:1,  	y:0,       	x:0,      	t:'', fixed:true                          	},	// haut gauche
+		 	{fs:30, 	fo:1,  	y:0,       	x:width,  	t:'', fixed:true                          	},	// haut droite
+		 	{fs:30, 	fo:1,  	y:height,  	x:0,      	t:'', fixed:true                          	},	// bas gauche
+		 	{fs:30, 	fo:1,  	y:height,  	x:width,  	t:'', fixed:true                          	},	// bas droite
+		].map(function(n){
+			n[0] = n.x; n[1] = n.y
+			return n;
+		});
+	function get(k,append) {
+		return function(d) {
+			return d[k];
+		}
+	}
+
+	d3.geom.voronoi().links(nodes).forEach(function(link){
+		var dx = link.source.x - link.target.x,
+				dy = link.source.y - link.target.y;
+		link.distance = Math.sqrt(dx * dx + dy * dy);
+		links.push(link);
+	});
+
+	var mainIndex;
+	nodes.forEach(function(n,i){
+		if (i < 26) {
+			n.fixed = true;
+			if (n.x > width/2) {
+				n.x = 1500;
+			} else {
+				n.x = -500;
+			}
+			if (n.t === 'Touwin') {
+				mainIndex = i;
+			}
+		}
+	});
+
+	svg.selectAll('text').remove(); // on supprime les text existants
+	var text = svg.selectAll('text.tag').data(nodes).enter()
+		.append('text')
+			.attr('class','tag')
+			.text(get('t'))
+			.attr('x',get('x'))
+			// .attr('y',function(){return Math.random * 1000})
+			.attr('y',get('y'))
+			.attr('font-size',get('fs'))
+			.style('fill-opacity',get('fo'))
+			.call(force.drag)
+
+	var link = svg.selectAll("line")
+		.data(links)
+		.enter().append("line")
+			.attr("x1", function(d) { return d.source.x; })
+			.attr("y1", function(d) { return d.source.y; })
+			.attr("x2", function(d) { return d.target.x; })
+			.attr("y2", function(d) { return d.target.y; });
+
+
+	function tick(e) {
+		text
+			.attr('x',get('x'))
+			.attr('y',get('y'));
+		link
+			.attr("x1", function(d) { return d.source.x; })
+			.attr("y1", function(d) { return d.source.y; })
+			.attr("x2", function(d) { return d.target.x; })
+			.attr("y2", function(d) { return d.target.y; });
+	}
+
+	force
+		.nodes(nodes)
+		.links(links)
+		.linkStrength(0.5)
+		.charge(1)
+		.gravity(0)
+		.linkDistance(get('distance'));
+
+
+		force.on('tick',tick);
+		force.start();
+
+
+		var lastTextNodeIndex = 25;
+		var curNodeIndex = 0;
+		(function addTagLoop(i) {
+			setTimeout(function(){
+				if (i === mainIndex) {
+					addTagLoop(i+1);
+				}
+				else if (i > lastTextNodeIndex) {
+					setTimeout(function(){
+						nodes[mainIndex].fixed = false;
+						force.resume();
+					},1500)
+				} else {
+					nodes[i].fixed = false;
+					force.resume();
+					addTagLoop(i+1);
+				}
+			},50);
+		}(curNodeIndex ));
+		/*
+		*/
+</script>
+

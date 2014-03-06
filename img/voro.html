@@ -1,0 +1,93 @@
+<html>
+<head>
+    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
+    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.geom.js"></script>
+</head>
+<body>
+  <div id="chart">
+  </div>
+  <script type="text/javascript">
+
+  var margin = {top: 200, right: 100, bottom: 200, left: 100};
+
+  var w = 960 - margin.left - margin.right,
+      h = 500 - margin.top - margin.bottom;
+
+  var vertices = d3.range(25).map(function(d) {
+    return [Math.random() * w, Math.random() * h];
+  });
+
+var vertices =  [ {fs:37,   fo:1,   y:66,   x:65,   t:'Zéro-Déchet'                             },
+    {fs:38,   fo:1,   y:110,  x:443,  t:'Agriculture'                             },
+    {fs:31,   fo:1,   y:207,  x:627,  t:'Locavore'                                },
+    {fs:34,   fo:1,   y:159,  x:349,  t:'Solidarité'                              },
+    {fs:37,   fo:1,   y:31,   x:324,  t:'Ecologie'                                },
+    {fs:36,   fo:0.6, y:238,  x:262,  t:'Environnement'                           },
+    {fs:34,   fo:1,   y:203,  x:300,  t:'Astuces'                                 },
+    {fs:29,   fo:0.6, y:26,   x:5,    t:'Alimentation'                            },
+    {fs:37,   fo:0.6, y:33,   x:486,  t:'Consomation'                             },
+    {fs:37,   fo:0.6, y:70,   x:398,  t:'Bons plans'                              },
+    {fs:35,   fo:0.6, y:244,  x:3,    t:'Occasion'                                },
+    {fs:42,   fo:1,   y:171,  x:705,  t:'Vrac'                                    },
+    {fs:36,   fo:1,   y:70,   x:599,  t:'Coopération'                             },
+    {fs:37,   fo:0.6, y:120,  x:337,  t:'Santé'                                   },
+    {fs:24,   fo:1,   y:65,   x:295,  t:'Durable'                                 },
+    {fs:31,   fo:1,   y:171,  x:505,  t:'Recycler'                                },
+    {fs:32,   fo:0.6, y:208,  x:45,   t:'Développement'                           },
+    {fs:29,   fo:0.6, y:239,  x:723,  t:'Amap'                                    },
+    {fs:24,   fo:0.6, y:200,  x:443,  t:'Désobéissance'                           },
+    {fs:24,   fo:1,   y:138,  x:585,  t:'Entraide'                                },
+    {fs:37,   fo:1,   y:245,  x:183,  t:'Bio'                                     },
+    {fs:32,   fo:0.6, y:112,  x:647,  t:'Economie'                                },
+    {fs:110,  fo:1,   y:149,  x:5,    t:'Touwin'                                  },
+    {fs:20,   fo:1,   y:172,  x:15,   t:'Avec des jeux de mots pourris dedans !'  },
+    {fs:28,   fo:0,   y:30,   x:200,  t:'Energie'                                 },
+    {fs:30,   fo:1,   y:240,  x:525,  t:'Composter'                               }
+  ].map(function(it){return [it.x,it.y]})
+
+  var svg = d3.select("#chart").append("svg")
+    .attr("width", w + margin.left + margin.right)
+    .attr("height", h + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var paths, points;
+  points = svg.append("svg:g").attr("id", "points");
+  paths = svg.append("svg:g").attr("id", "point-paths");
+
+
+  paths.selectAll("path")
+      .data(d3.geom.voronoi(vertices))
+    .enter().append("svg:path")
+      .attr("d", function(d) { return "M" + d.join(",") + "Z"; })
+      .attr("id", function(d,i) {
+        return "path-"+i; })
+      .style("fill", d3.rgb(230, 230, 230))
+      .style('fill-opacity', 0.4)
+      .style("stroke", d3.rgb(200,200,200));
+
+  paths.selectAll("path")
+    .on("mouseover", function(d, i) {
+      d3.select(this)
+        .style('fill', d3.rgb(31, 120, 180));
+      svg.select('circle#point-'+i)
+        .style('fill', d3.rgb(31, 120, 180))
+    })
+    .on("mouseout", function(d, i) {
+      d3.select(this)
+        .style("fill", d3.rgb(230, 230, 230));
+      svg.select('circle#point-'+i)
+        .style('fill', 'black')
+    });
+
+  points.selectAll("circle")
+      .data(vertices)
+    .enter().append("svg:circle")
+      .attr("id", function(d, i) {
+        return "point-"+i; })
+      .attr("transform", function(d) { return "translate(" + d + ")"; })
+      .attr("r", 2)
+      .attr('stroke', 'none');
+
+  </script>
+</body>
+</html>

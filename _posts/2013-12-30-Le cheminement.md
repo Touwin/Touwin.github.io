@@ -1,3 +1,8 @@
+---
+title: "Le Cheminement"
+layout: default
+---
+
 # Le cheminement
 
 ## Le désordre alimentaire global

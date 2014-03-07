@@ -1,11 +1,10 @@
 ---
-title: "Lud's Dev Blog"
+title: "Touwin"
 layout: default
 ---
 
 
 
-<a href="/a-propos/">À propos</a>
 
 
 <ul class="posts">

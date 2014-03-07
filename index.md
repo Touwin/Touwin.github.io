@@ -5,7 +5,7 @@ layout: default
 
 
 
-
+TEST
 
 <ul class="posts">
   {% for post in site.posts limit: 5 %}

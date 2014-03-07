@@ -33,3 +33,8 @@ Des réponses sont possibles :
                     +S'informer, se mobiliser, faire comprendre autour de soi.
 
 Bibliographie sur l'alimentation :
+
+## Mode de vie : Zéro Déchet 
+
+La promotion et la pratique de ce mode de vie a une véritable icone : Béa Johnson. Vous en avez très certainement entendu parler donc pour faire simple : cette femme, son mari et leurs deux enfants ne produisent qu'un litre de déchets par an ! Inutile de chercher les failles, on ne peut être qu'admiratif ! Le livre à présenter avant tout dans cette rubrique est donc le sien : Zéro-Déchets 
+![Zéro-Déchet par Béa Johnson](http://3.bp.blogspot.com/-xh3RGBF9-H8/UjGF3I6mRsI/AAAAAAAABoI/8I4qIVXA30I/s1600/Z%C3%A9ro+d%C3%A9chet+Cover.jpg)

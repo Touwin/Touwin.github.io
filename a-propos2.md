@@ -12,7 +12,7 @@ Touwin est un blog qui a pour but de partager des trucs et astuces avec tous les
 
 ## C'est qui ?
 
-Deux toulousains qui vivent dans le centre de notre belle ville rose. Ici on s'appellera Lip et Glu !
+Lip et Glu (auteurs, compositeurs et interprêtes de ce blog) sont deux toulousains qui vivent au coeur de notre ville rose !
 
 
 ## Pourquoi ?

@@ -1,5 +1,5 @@
-name: "lud"
-description: ""
+name: "touwin"
+description: "Un blog ..."
 url: "http://touwin.github.io"
 permalink: pretty
 pygments: true

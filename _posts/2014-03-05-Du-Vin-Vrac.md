@@ -1,5 +1,7 @@
-
-
+---
+title: "Trois lieux pour acheter du Vin en vrac à Toulouse"
+layout: default
+---
 
 #Trois lieux pour acheter du Vin en vrac à Toulouse
 
@@ -13,3 +15,7 @@ et faire remplir vos bouteilles (Réutiliser vos anciennes bouteilles si vous av
 ## La cave l'Envie : Vin haut de gamme
 
 ## Biocoop Purpan : Du vin et bio en plus !
+
+
+Trois lieux à visiter pour boire du vin et toujours en ne faisant aucun déchet ! Et comme on aime beaucoup <strike>le vin</strike>
+les défis, on espère qu'on aura d'autres lieux à vous présenter prochainement !

@@ -25,11 +25,11 @@ Ce désordre alimentaire mondiale dans lequel nous baignons devrait nous alerter
 Se nourrir est une chose que l'on fait 3 fois par jour, tous les jours de l'année. Vos choix en ce qui concerne votre alimentation ont un énorme impact sur vous même, votre santé, l'environnement et l'humain.
 
 Des réponses sont possibles :
-                    - Essayer par tous les moyens de ne plus participer à ce système
-                    - Encourager une agriculture locale, vivriere, favoriser les circuits courts (être "locavore")
-                    - Encourager les agricultures plus saines moins polluantes et respectueuses de l'environnement (labels, bio)
-                    - Acheter des produits éthiques et équitables
-                    - S'inscrire dans une AMAP (Association pour le maintien d'une agriculture paysanne) et favoriser tous les systèmes de ce type
-                    - S'informer, se mobiliser, faire comprendre autour de soi.
+                    * Essayer par tous les moyens de ne plus participer à ce système
+                    * Encourager une agriculture locale, vivriere, favoriser les circuits courts (être "locavore")
+                    * Encourager les agricultures plus saines moins polluantes et respectueuses de l'environnement (labels, bio)
+                    * Acheter des produits éthiques et équitables
+                    * S'inscrire dans une AMAP (Association pour le maintien d'une agriculture paysanne) et favoriser tous les systèmes de ce type
+                    * S'informer, se mobiliser, faire comprendre autour de soi.
 
 Bibliographie sur l'alimentation :

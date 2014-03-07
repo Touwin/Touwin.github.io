@@ -1,11 +1,14 @@
-Bibliographie
+---
+title: "Bibliographie"
+layout: default
+---
+
+#Bibliographie
 
 Vous trouverez ici une liste d'ouvrages et de films qui ont nourris nos connaissances sur les divers sujets qui sont abordés sur le blog : alimentation, santé, consommation, réduction des déchets. Comme on est jamais mieux servi que par soi-même, à vous de les lire et regarder pour pouvoir vous faire vos propres opinions.
 Cette bibliographie / filmographie n'a pas la prétention ni d'être exhaustive, ni de détenir la vérité. Ce sont juste des ouvrages / films qui traitent des sujets qui nous concernent, à vous de les lire avec un esprit critique et en multipliant et croisant vos sources afin de confronter les opinions.
 
-
-
-1 - Le désordre alimentaire mondial : de très nombreux paradoxes
+## 1 - Le désordre alimentaire mondial : de très nombreux paradoxes
 
 850 millions de personnes vivent en situation de sous-alimentation chronique (source : FAO), pourtant la production semble largement suffisante pour nourrir la population mondiale actuelle. "le terrien moyen dispose actuellement d'une ration journalière théorique de 2800 kilocalories, ce qui est nettement au dessus de la ration journalière de 2500 kilocalories considérée à la fois comme nécessaire et suffisante par les nutritionnistes".
 
@@ -30,4 +33,3 @@ Des réponses sont possibles :
                     - S'informer, se mobiliser, faire comprendre autour de soi.
 
 Bibliographie sur l'alimentation :
-

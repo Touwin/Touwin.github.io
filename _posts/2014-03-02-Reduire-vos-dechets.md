@@ -1,5 +1,7 @@
-
-
+---
+title: "Réduire vos déchets : niveau gros newbie"
+layout: default
+---
 
 # Réduire vos déchets : niveau gros newbie (débutant !)
 

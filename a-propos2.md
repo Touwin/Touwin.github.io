@@ -20,6 +20,6 @@ Parce qu'on pense que l'information, le partage et l'échange sont essentiels ! 
 ## Avertissement
 
 Tranquilousains n'est pas un blog d'économistes, ni de médecins, ni de nutritionnistes (et non, pas non plus d'ingénieurs Airbus).
-Tout ce que vous trouverez ici est à titre indicatif. A vous de développer votre esprit critique et d'y prendre ce qui vous correspond ou sert.
+Tout ce que vous trouverez ici est à titre indicatif. A vous d'utiliser votre esprit critique et d'y prendre ce qui vous correspond ou sert.
 Nous ne serons pas exhaustif et ne prétendons en aucun cas être omniscient. Nous n'avons pas la prétention d'être nous même parfaits, et d'avoir toujours les bons comportements / reflexes.
 Le but du blog est uniquement de partager certaines choses dont nous pensons qu'elles peuvent être utiles à d'autres.

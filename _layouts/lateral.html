@@ -1,0 +1,241 @@
+
+<!doctype html>
+<meta charset="utf-8">
+<title>MV Toulouse | Touwin</title>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="http://touwin.github.io/css/main.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content=""/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+
+
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+
+
+
+<style type="text/css">
+
+
+</style>
+<header>
+	<div class="paper">
+		<svg id="banner" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="800" height="250">
+			<style type="text/css">
+				text {	cursor:pointer;
+				      				line-height:125%;
+				      				stroke:none;
+				      				font-family:Impact;
+				      				text-anchor:start;
+				      				fill:white;
+				}
+				line {
+					stroke:none;
+				}
+			</style>
+		</svg>
+	</div>
+</header>
+<script type="text/javascript">
+	var svg = d3.select('#banner'),
+		width = 800,
+		height = 250,
+		nodes = [],
+		links = [];
+		force = d3.layout.force().size([width,height]);
+	var textNodes =
+		[	{fs:37, 	fo:1,  	y:66, 	x:65, 	t:'Zéro-Déchet'                           	}, // 0
+		 	{fs:38, 	fo:1,  	y:110,	x:443,	t:'Agriculture'                           	}, // 1
+		 	{fs:31, 	fo:1,  	y:207,	x:627,	t:'Locavore'                              	}, // 2
+		 	{fs:34, 	fo:1,  	y:159,	x:349,	t:'Solidarité'                            	}, // 3
+		 	{fs:37, 	fo:1,  	y:31, 	x:324,	t:'Ecologie'                              	}, // 4
+		 	{fs:36, 	fo:0.6,	y:238,	x:262,	t:'Environnement'                         	}, // 5
+		 	{fs:34, 	fo:1,  	y:203,	x:300,	t:'Astuces'                               	}, // 6
+		 	{fs:29, 	fo:0.6,	y:26, 	x:5,  	t:'Alimentation'                          	}, // 7
+		 	{fs:37, 	fo:0.6,	y:33, 	x:486,	t:'Consomation'                           	}, // 8
+		 	{fs:37, 	fo:0.6,	y:70, 	x:398,	t:'Bons plans'                            	}, // 9
+		 	{fs:35, 	fo:0.6,	y:244,	x:3,  	t:'Occasion'                              	}, // 10
+		 	{fs:42, 	fo:1,  	y:171,	x:705,	t:'Vrac'                                  	}, // 11
+		 	{fs:36, 	fo:1,  	y:70, 	x:599,	t:'Coopération'                           	}, // 12
+		 	{fs:37, 	fo:0.6,	y:120,	x:337,	t:'Santé'                                 	}, // 13
+		 	{fs:24, 	fo:1,  	y:65, 	x:295,	t:'Durable'                               	}, // 14
+		 	{fs:31, 	fo:1,  	y:171,	x:505,	t:'Recycler'                              	}, // 15
+		 	{fs:32, 	fo:0.6,	y:208,	x:45, 	t:'Développement'                         	}, // 16
+		 	{fs:29, 	fo:0.6,	y:239,	x:723,	t:'Amap'                                  	}, // 17
+		 	{fs:24, 	fo:0.6,	y:200,	x:443,	t:'Désobéissance'                         	}, // 18
+		 	{fs:24, 	fo:1,  	y:138,	x:585,	t:'Entraide'                              	}, // 19
+		 	{fs:37, 	fo:1,  	y:245,	x:183,	t:'Bio'                                   	}, // 20
+		 	{fs:32, 	fo:0.6,	y:112,	x:647,	t:'Economie'                              	}, // 21
+		 	{fs:20, 	fo:1,  	y:172,	x:15, 	t:'Avec des jeux de mots pourris dedans !'	}, // 22
+		 	{fs:28, 	fo:0,  	y:30, 	x:200,	t:'Energie'                               	}, // 23
+		 	{fs:30, 	fo:1,  	y:240,	x:525,	t:'Composter'                             	}, // 24
+		 	{fs:110,	fo:1,  	y:149,	x:10, 	t:'Touwin'                                	}, // 25
+		].map(function(n){
+			// n[0] = n.x; n[1] = n.y
+			return n;
+		});
+
+	function get(k,append) {
+		return function(d) {
+			return d[k];
+		}
+	}
+
+	// Pour chaque mot de notre bannière, on crée un autre node, qui
+	// sera invisible (texte '') et qui aura fixed:true et une charge de
+	// 0. Chaque texte sera lié avec son point fixe correspondant.
+
+	// Pour que les textes arrivent petit à petit sur l'image ils seront
+	// d'abod fixés loin en dehors du dessin, tandis que les ghost
+	// seront (et resteront) fixés aux places définitives
+
+	textNodes.forEach(function(n){
+		var copy = {};
+		copy.x = n.x;
+		copy.y = n.y;
+		copy.fixed = true;
+		n.fixed = true;
+		copy.fs = 0; // les ghost ont une police de 0
+		copy.fo = 0; // une opacity de 0 aussi
+		copy.t = ''; // et pas de texte
+		copy.isCopy = true;
+		n.isCopy = false;
+		nodes.push(n);
+		nodes.push(copy);
+		links.push({
+			target:n,
+			source:copy,
+			distance:0
+		});
+	});
+
+	var mainIndex;
+	nodes.forEach(function(n,i){
+		n.fixed = true;
+		n.fixed = true;
+		if (!n.isCopy) {
+			if (n.x > width/2) {
+				n.x = 1800;
+				// n.x = 500;
+			} else {
+				n.x = -1000;
+				// n.x = 0;
+			}
+			if (n.t === 'Touwin') {
+				mainIndex = i;
+			}
+		}
+	});
+
+	var text = svg.selectAll('text.tag').data(nodes).enter()
+		.append('text')
+			.attr('class','tag')
+			.text(get('t'))
+			.attr('x',get('x'))
+			// .attr('y',function(){return Math.random * 1000})
+			.attr('y',get('y'))
+			.attr('font-size',get('fs'))
+			.style('fill-opacity',get('fo'))
+			.on('click',function(d){alert(d.t)})
+	var link = svg.selectAll("line")
+		.data(links)
+		.enter().append("line")
+			.attr("x1", function(d) { return d.source.x; })
+			.attr("y1", function(d) { return d.source.y; })
+			.attr("x2", function(d) { return d.target.x; })
+			.attr("y2", function(d) { return d.target.y; });
+
+
+	function tick(e) {
+		text
+			.attr('x',get('x'))
+			.attr('y',get('y'));
+		link
+			.attr("x1", function(d) { return d.source.x; })
+			.attr("y1", function(d) { return d.source.y; })
+			.attr("x2", function(d) { return d.target.x; })
+			.attr("y2", function(d) { return d.target.y; });
+	}
+
+	force
+		.nodes(nodes)
+		.links(links)
+		.linkStrength(1)
+		.charge(function(n){
+			return n.isCopy ? 0 : -30
+		})
+		.gravity(0)
+		.linkDistance(get('distance'));
+
+
+		force.on('tick',tick);
+		force.on('end',function(){
+		});
+		force.start();
+
+		// Maintenant que tout est en place on va "défixer" nos nodes.
+
+		// On parcourt tous les nodes, sur les copies on ne fait rien ils
+		// restent fixes. Sur le mainindex (qui contient le titre
+		// principal) on passe également pour s'en occuper plus tard
+
+		var lastTextNodeIndex = nodes.length -1;
+		var curNodeIndex = 0;
+		(function addTagLoop(i,time) {
+			var time = time || 50;
+			setTimeout(function(){
+				if (i === mainIndex) {
+					addTagLoop(i+1,0);
+				}
+				else if (i > lastTextNodeIndex) {
+					// ici on a passé tous les nodes, on s'occuppe du titre
+					// principal
+					setTimeout(function(){
+						nodes[mainIndex].fixed = false;
+						force.gravity(0);
+						force.resume();
+					},1500)
+				} else if (nodes[i].isCopy) {
+					addTagLoop(i+1,0);
+				} else {
+					nodes[i].fixed = false;
+					force.resume();
+					addTagLoop(i+1);
+				}
+			},time);
+		}(curNodeIndex));
+		/*
+		*/
+</script>
+
+
+
+<div class="container global">
+		<div class="main-menu">
+				<a href="/">Accueil</a>
+				<a href="/bibliographie/">Bibliographie</a>
+				<a href="/carte/">Carte</a>
+				<a href="/a-propos2/">À propos</a>
+		</div>
+<ul class="posts">
+
+    <li><span>05 Mar 2014</span> &mdash; <a href="/2014/03/05/Du-Vin-Vrac/">Trois lieux pour acheter du Vin en vrac à Toulouse</a></li>
+
+    <li><span>02 Mar 2014</span> &mdash; <a href="/2014/03/02/Reduire-vos-dechets/">Réduire vos déchets : niveau gros newbie</a></li>
+
+    <li><span>30 Dec 2013</span> &mdash; <a href="/2013/12/30/Lush/">LUSH : Des cosmétiques en vrac à Toulouse</a></li>
+
+</ul>
+
+
+</div>
+
+
+
+
